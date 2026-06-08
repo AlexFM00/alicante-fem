@@ -28,7 +28,7 @@ function Nav({ onSettings }) {
     <nav className={"af-nav" + (scrolled ? " af-nav-solid" : "")}>
       <div className="af-wrap af-nav-inner">
         <div className="af-brand">
-          <image-slot id="club-crest" class="af-brand-crest" shape="rounded" radius="8" placeholder="escudo"></image-slot>
+          <img src="escudo.png" alt="Escudo Alicante Fem" className="af-brand-crest-img" />
           <a href="#inicio" className="af-brand-link" onClick={() => setOpen(false)}>
             <span className="af-brand-tx">Alicante<strong>Fem</strong></span>
           </a>
