@@ -1,12 +1,16 @@
 // webhook.jsx — integración con n8n
-// Cada automatización de n8n tiene su propia URL de webhook.
-// Aún no las tienes -> quedan vacías y se configuran desde el panel de Ajustes
-// (icono engranaje, arriba a la derecha). Se guardan en el navegador (localStorage).
+// Las URLs fijas están hardcodeadas (WH_FIXED). Las configurables desde el
+// panel de Ajustes (icono ⚙) se guardan en localStorage.
 
+// URLs fijas — no editables desde el panel público
+const WH_FIXED = {
+  newsletter: "https://afinestratm.app.n8n.cloud/webhook/alicantefem-newsletter-signup",
+};
+
+// URLs configurables desde el panel ⚙ (se irán añadiendo conforme se activen)
 const WH_KEYS = [
   { key: "chatbot", label: "Chatbot de padres", help: "Recibe cada mensaje de la conversación." },
   { key: "tienda", label: "Pedidos de tienda", help: "Recibe los pedidos de ropa (talla, cantidad, datos)." },
-  { key: "newsletter", label: "Newsletter", help: "Recibe los emails de suscripción." },
   { key: "contacto", label: "Contacto / consultas", help: "Mensajes del formulario de contacto." },
 ];
 
@@ -27,7 +31,8 @@ function saveWebhooks(obj) {
 // Devuelve { ok, demo, data, error }.
 async function sendToN8n(which, payload) {
   const hooks = loadWebhooks();
-  const url = (hooks[which] || "").trim();
+  // Las URLs fijas tienen prioridad sobre las de localStorage
+  const url = (WH_FIXED[which] || hooks[which] || "").trim();
   const body = {
     source: "alicante-fem-web",
     type: which,
