@@ -219,6 +219,27 @@ select.af-input{min-width:120px;appearance:none;background-image:url("data:image
 .af-news-done strong{display:block;font-size:19px;margin-bottom:6px;}
 .af-news-done p{color:rgba(255,255,255,.7);font-size:14px;}
 
+/* Newsletter rich form */
+.af-news-form-full{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:24px;backdrop-filter:blur(4px);}
+.af-nl-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.af-nl-field{display:flex;flex-direction:column;gap:8px;}
+.af-nl-field-wide{grid-column:1 / -1;}
+.af-nl-field>span{font-size:13px;font-weight:700;color:#fff;letter-spacing:.02em;}
+.af-nl-field>span em{font-style:normal;font-weight:500;color:var(--sky);font-size:12px;margin-left:6px;}
+.af-news-form-full .af-input{background:rgba(255,255,255,.95);border-color:transparent;color:var(--ink);}
+.af-news-form-full textarea.af-input{font-family:inherit;resize:vertical;min-height:78px;}
+.af-nl-row{display:flex;gap:10px;flex-wrap:wrap;}
+.af-nl-row .af-input{flex:1;min-width:140px;}
+.af-nl-checks{display:flex;flex-wrap:wrap;gap:10px;}
+.af-nl-chk{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.18);border-radius:100px;padding:8px 14px;font-size:14px;color:#fff;cursor:pointer;transition:.18s;font-weight:500;}
+.af-nl-chk:hover{border-color:var(--sky);}
+.af-nl-chk-on{background:var(--blue);border-color:var(--blue);}
+.af-nl-chk input{appearance:none;width:14px;height:14px;border:1.5px solid rgba(255,255,255,.5);border-radius:3px;margin:0;position:relative;cursor:pointer;}
+.af-nl-chk-on input{background:#fff;border-color:#fff;}
+.af-nl-chk-on input::after{content:"✓";position:absolute;inset:-2px 0 0 1px;font-size:13px;font-weight:900;color:var(--blue);}
+.af-nl-foot{display:flex;justify-content:flex-end;align-items:center;gap:18px;margin-top:22px;}
+@media(max-width:760px){.af-nl-grid{grid-template-columns:1fr;}}
+
 /* CONTACT (chat como sección) */
 .af-contact{background:var(--paper);}
 .af-contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}

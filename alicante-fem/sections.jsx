@@ -309,39 +309,115 @@ function ShopSection() {
 }
 
 /* ---------- NEWSLETTER ---------- */
+const NL_CATEGORIAS = ["Benjamín", "Alevín", "Infantil", "Cadete", "Juvenil", "Senior", "Solo me informo"];
+const NL_ORIGEN = ["Web", "Instagram", "Boca a boca", "Evento del club", "Otro"];
+const NL_INTERESES = [
+  { key: "partidos", label: "Convocatorias y resultados" },
+  { key: "eventos", label: "Eventos del club" },
+  { key: "tienda", label: "Tienda y equipaciones" },
+  { key: "pruebas", label: "Pruebas para jugadoras nuevas" },
+];
+
 function Newsletter() {
-  const [email, setEmail] = React.useState("");
+  const [form, setForm] = React.useState({
+    nombre: "", email: "", telefono: "",
+    jugadora_nombre: "", jugadora_edad: "",
+    categoria_interes: "", origen: "",
+    intereses: [],
+    mensaje: "",
+  });
   const [status, setStatus] = React.useState("idle");
   const [demo, setDemo] = React.useState(false);
+
+  const set = (k, v) => setForm((s) => ({ ...s, [k]: v }));
+  const toggleInteres = (k) => set("intereses",
+    form.intereses.includes(k) ? form.intereses.filter((x) => x !== k) : [...form.intereses, k]
+  );
+
   const submit = async (e) => {
     e.preventDefault();
     if (status === "sending") return;
     setStatus("sending");
-    const res = await window.sendToN8n("newsletter", { email });
-    if (res.ok) { setDemo(!!res.demo); setStatus("done"); setEmail(""); }
-    else setStatus("error");
+    const payload = {
+      ...form,
+      jugadora_edad: form.jugadora_edad ? Number(form.jugadora_edad) : null,
+    };
+    const res = await window.sendToN8n("newsletter", payload);
+    if (res.ok) {
+      setDemo(!!res.demo); setStatus("done");
+      setForm({ nombre: "", email: "", telefono: "", jugadora_nombre: "", jugadora_edad: "", categoria_interes: "", origen: "", intereses: [], mensaje: "" });
+    } else setStatus("error");
   };
+
   return (
     <section className="af-news af-section" id="newsletter">
       <div className="af-wrap af-news-inner">
         <div className="af-news-text">
           <div className="af-eyebrow af-eyebrow-light">Newsletter</div>
           <h2 className="af-h2 af-h2-light">No te pierdas nada del club</h2>
-          <p>Convocatorias, resultados, eventos y novedades de la tienda. Una vez por semana, sin spam.</p>
+          <p>Convocatorias, resultados, eventos y novedades de la tienda. Una vez por semana, sin spam. Cuéntanos un poco sobre ti para personalizar lo que te llega.</p>
         </div>
         {status === "done" ? (
           <div className="af-news-done">
             <div className="af-success-ic">✓</div>
             <strong>¡Suscrita!</strong>
-            <p>{demo ? "Modo demo: conecta el webhook de newsletter en Ajustes." : "Te has unido a la newsletter del club. 💙"}</p>
+            <p>{demo ? "Modo demo: conecta el webhook de newsletter en Ajustes." : "Te has unido a la newsletter del Alicante Fem. Revisa tu email, te hemos mandado la bienvenida. 💙🤍"}</p>
           </div>
         ) : (
-          <form className="af-news-form" onSubmit={submit}>
-            <input className="af-input" required type="email" placeholder="tucorreo@email.com" value={email} onChange={(e) => setEmail(e.target.value)} />
-            <button className="af-btn af-btn-primary" disabled={status === "sending"}>
-              {status === "sending" ? "…" : "Suscribirme"}
-            </button>
-            {status === "error" && <p className="af-err af-err-light">No se pudo enviar. Revisa el webhook en Ajustes.</p>}
+          <form className="af-news-form-full" onSubmit={submit}>
+            <div className="af-nl-grid">
+              <label className="af-nl-field">
+                <span>Tu nombre <em>*</em></span>
+                <input className="af-input" required type="text" placeholder="Ej. Patricia García" value={form.nombre} onChange={(e) => set("nombre", e.target.value)} />
+              </label>
+              <label className="af-nl-field">
+                <span>Email <em>*</em></span>
+                <input className="af-input" required type="email" placeholder="tucorreo@email.com" value={form.email} onChange={(e) => set("email", e.target.value)} />
+              </label>
+              <label className="af-nl-field">
+                <span>Teléfono <em>opcional</em></span>
+                <input className="af-input" type="tel" placeholder="600 000 000" value={form.telefono} onChange={(e) => set("telefono", e.target.value)} />
+              </label>
+              <label className="af-nl-field">
+                <span>¿Cómo nos conociste?</span>
+                <select className="af-input" required value={form.origen} onChange={(e) => set("origen", e.target.value)}>
+                  <option value="">Elige una opción…</option>
+                  {NL_ORIGEN.map((o) => <option key={o} value={o}>{o}</option>)}
+                </select>
+              </label>
+              <label className="af-nl-field af-nl-field-wide">
+                <span>Sobre tu hija <em>opcional · si vas a apuntarla</em></span>
+                <div className="af-nl-row">
+                  <input className="af-input" type="text" placeholder="Nombre de la jugadora" value={form.jugadora_nombre} onChange={(e) => set("jugadora_nombre", e.target.value)} />
+                  <input className="af-input" type="number" min="6" max="40" placeholder="Edad" value={form.jugadora_edad} onChange={(e) => set("jugadora_edad", e.target.value)} style={{ maxWidth: 110 }} />
+                  <select className="af-input" value={form.categoria_interes} onChange={(e) => set("categoria_interes", e.target.value)} style={{ maxWidth: 180 }}>
+                    <option value="">Categoría de interés…</option>
+                    {NL_CATEGORIAS.map((c) => <option key={c} value={c}>{c}</option>)}
+                  </select>
+                </div>
+              </label>
+              <div className="af-nl-field af-nl-field-wide">
+                <span>¿Sobre qué quieres recibir info?</span>
+                <div className="af-nl-checks">
+                  {NL_INTERESES.map((i) => (
+                    <label key={i.key} className={"af-nl-chk" + (form.intereses.includes(i.key) ? " af-nl-chk-on" : "")}>
+                      <input type="checkbox" checked={form.intereses.includes(i.key)} onChange={() => toggleInteres(i.key)} />
+                      <span>{i.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+              <label className="af-nl-field af-nl-field-wide">
+                <span>Mensaje opcional</span>
+                <textarea className="af-input" rows="3" placeholder="Algo que quieras contarnos…" value={form.mensaje} onChange={(e) => set("mensaje", e.target.value)} />
+              </label>
+            </div>
+            <div className="af-nl-foot">
+              <button type="submit" className="af-btn af-btn-primary" disabled={status === "sending"}>
+                {status === "sending" ? "Enviando…" : "Quiero suscribirme 💙"}
+              </button>
+              {status === "error" && <p className="af-err af-err-light">No se pudo enviar. Revisa el webhook en Ajustes.</p>}
+            </div>
           </form>
         )}
       </div>
