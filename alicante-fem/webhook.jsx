@@ -5,12 +5,12 @@
 // URLs fijas — no editables desde el panel público
 const WH_FIXED = {
   newsletter: "https://afinestratm.app.n8n.cloud/webhook/alicantefem-newsletter-signup",
+  tienda: "https://afinestratm.app.n8n.cloud/webhook/alicantefem-entrega-ropa",
 };
 
 // URLs configurables desde el panel ⚙ (se irán añadiendo conforme se activen)
 const WH_KEYS = [
   { key: "chatbot", label: "Chatbot de padres", help: "Recibe cada mensaje de la conversación." },
-  { key: "tienda", label: "Pedidos de tienda", help: "Recibe los pedidos de ropa (talla, cantidad, datos)." },
   { key: "contacto", label: "Contacto / consultas", help: "Mensajes del formulario de contacto." },
 ];
 
