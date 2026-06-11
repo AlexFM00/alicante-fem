@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 300">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.2" y2="1">
+      <stop offset="0%" stop-color="#1763B6"/>
+      <stop offset="100%" stop-color="#0B1F3A"/>
+    </linearGradient>
+    <linearGradient id="jersey" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e8edf8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="240" height="300" fill="url(#bg)"/>
+  <ellipse cx="100" cy="294" rx="50" ry="6" fill="rgba(0,0,0,0.3)"/>
+
+  <!-- Balón -->
+  <circle cx="188" cy="258" r="18" fill="white" opacity="0.9"/>
+  <path d="M188,240 L183,250 L193,250 Z" fill="#1763B6" opacity="0.6"/>
+  <path d="M176,255 L188,250 L188,262 Z" fill="#0B1F3A" opacity="0.4"/>
+  <circle cx="188" cy="258" r="18" fill="none" stroke="rgba(0,0,0,0.15)" stroke-width="1.5"/>
+
+  <!-- Brazo izquierdo estirado (equilibrio al chutar) -->
+  <path d="M88,124 Q58,130 38,118" stroke="#E8C49A" stroke-width="15" stroke-linecap="round" fill="none"/>
+  <circle cx="36" cy="116" r="9" fill="#E8C49A"/>
+
+  <!-- Brazo derecho ligeramente atrás -->
+  <path d="M152,124 Q170,140 174,162" stroke="#E8C49A" stroke-width="15" stroke-linecap="round" fill="none"/>
+  <circle cx="174" cy="165" r="9" fill="#E8C49A"/>
+
+  <!-- Jersey cuerpo -->
+  <path d="M84,118 L156,118 L146,210 L94,210 Z" fill="url(#jersey)"/>
+  <path d="M84,118 L101,118 L97,210 L94,210 Z" fill="#1763B6" opacity="0.35"/>
+  <path d="M156,118 L139,118 L143,210 L146,210 Z" fill="#1763B6" opacity="0.35"/>
+  <path d="M107,118 Q120,128 133,118" stroke="#1763B6" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <text x="120" y="183" text-anchor="middle" font-family="'Arial Black',Arial,sans-serif" font-size="36" font-weight="900" fill="#1763B6" opacity="0.45">9</text>
+
+  <!-- Cuello -->
+  <rect x="110" y="100" width="20" height="22" rx="6" fill="#E8C49A"/>
+  <!-- Cabeza -->
+  <ellipse cx="120" cy="76" rx="26" ry="27" fill="#E8C49A"/>
+  <!-- Pelo suelto -->
+  <ellipse cx="120" cy="52" rx="27" ry="14" fill="#8B5E3C"/>
+  <path d="M94,62 Q80,80 86,104" stroke="#8B5E3C" stroke-width="10" stroke-linecap="round" fill="none"/>
+  <path d="M146,62 Q158,76 152,98" stroke="#8B5E3C" stroke-width="8" stroke-linecap="round" fill="none"/>
+
+  <!-- Pierna izquierda plantada -->
+  <path d="M94,208 L116,208 L112,272 L88,272 Z" fill="#0B1F3A"/>
+  <!-- Pierna derecha levantada (chut) -->
+  <path d="M146,208 L168,208 L200,248 L178,252 Z" fill="#0B1F3A"/>
+
+  <!-- Media pierna izquierda (plantada) -->
+  <rect x="86" y="270" width="28" height="20" rx="3" fill="white"/>
+  <rect x="86" y="270" width="28" height="6" fill="#1763B6"/>
+  <!-- Media pierna derecha (levantada, en ángulo) -->
+  <rect x="176" y="250" width="26" height="18" rx="3" fill="white" transform="rotate(20,189,259)"/>
+  <rect x="176" y="250" width="26" height="6" fill="#1763B6" transform="rotate(20,189,256)"/>
+
+  <!-- Bota izquierda (plantada) -->
+  <path d="M84,288 Q74,290 72,298 L112,298 L112,288 Z" fill="#0a1830"/>
+  <!-- Bota derecha (golpeando) -->
+  <path d="M178,258 Q192,254 200,258 L186,272 L172,268 Z" fill="#0a1830"/>
+
+  <text x="120" y="299" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="rgba(255,255,255,0.38)" letter-spacing="3">DELANTERA</text>
+</svg>

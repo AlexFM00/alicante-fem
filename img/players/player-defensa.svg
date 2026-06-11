@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 300">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.2" y2="1">
+      <stop offset="0%" stop-color="#1763B6"/>
+      <stop offset="100%" stop-color="#0B1F3A"/>
+    </linearGradient>
+    <linearGradient id="jersey" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e8edf8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="240" height="300" fill="url(#bg)"/>
+  <ellipse cx="120" cy="294" rx="58" ry="6" fill="rgba(0,0,0,0.3)"/>
+
+  <!-- Brazo izquierdo (ligeramente separado, postura defensiva) -->
+  <path d="M88,124 Q72,150 66,192" stroke="#E8C49A" stroke-width="15" stroke-linecap="round" fill="none"/>
+  <!-- Mano izquierda -->
+  <circle cx="66" cy="196" r="9" fill="#E8C49A"/>
+
+  <!-- Brazo derecho -->
+  <path d="M152,124 Q168,150 174,192" stroke="#E8C49A" stroke-width="15" stroke-linecap="round" fill="none"/>
+  <!-- Mano derecha -->
+  <circle cx="174" cy="196" r="9" fill="#E8C49A"/>
+
+  <!-- Jersey cuerpo -->
+  <path d="M83,118 L157,118 L147,210 L93,210 Z" fill="url(#jersey)"/>
+  <path d="M83,118 L100,118 L96,210 L93,210 Z" fill="#1763B6" opacity="0.35"/>
+  <path d="M157,118 L140,118 L144,210 L147,210 Z" fill="#1763B6" opacity="0.35"/>
+  <path d="M106,118 Q120,128 134,118" stroke="#1763B6" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <text x="120" y="183" text-anchor="middle" font-family="'Arial Black',Arial,sans-serif" font-size="36" font-weight="900" fill="#1763B6" opacity="0.45">4</text>
+
+  <!-- Cuello -->
+  <rect x="110" y="100" width="20" height="22" rx="6" fill="#E8C49A"/>
+  <!-- Cabeza -->
+  <ellipse cx="120" cy="76" rx="26" ry="28" fill="#E8C49A"/>
+  <!-- Pelo recogido -->
+  <ellipse cx="120" cy="52" rx="27" ry="14" fill="#2C1810"/>
+  <ellipse cx="120" cy="50" rx="20" ry="10" fill="#3D2517"/>
+  <!-- Moño lateral -->
+  <circle cx="144" cy="58" r="9" fill="#2C1810"/>
+
+  <!-- Pantalón corto - postura firme -->
+  <path d="M93,208 L118,208 L114,262 L88,262 Z" fill="#0B1F3A"/>
+  <path d="M147,208 L122,208 L126,262 L152,262 Z" fill="#0B1F3A"/>
+
+  <!-- Medias izquierda -->
+  <rect x="86" y="260" width="30" height="22" rx="3" fill="white"/>
+  <rect x="86" y="260" width="30" height="7" fill="#1763B6"/>
+  <!-- Medias derecha -->
+  <rect x="124" y="260" width="30" height="22" rx="3" fill="white"/>
+  <rect x="124" y="260" width="30" height="7" fill="#1763B6"/>
+
+  <!-- Botas izquierda -->
+  <path d="M84,280 Q74,282 72,290 L116,290 L116,280 Z" fill="#0a1830"/>
+  <!-- Botas derecha -->
+  <path d="M156,280 Q166,282 168,290 L124,290 L124,280 Z" fill="#0a1830"/>
+
+  <text x="120" y="299" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="rgba(255,255,255,0.38)" letter-spacing="3">DEFENSA</text>
+</svg>

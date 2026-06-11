@@ -63,6 +63,13 @@ function CitySection() {
 }
 
 /* ---------- EQUIPO ---------- */
+const POS_IMG = {
+  "Portera":         "img/players/player-portera.svg",
+  "Defensa":         "img/players/player-defensa.svg",
+  "Centrocampista":  "img/players/player-centrocampista.svg",
+  "Delantera":       "img/players/player-delantera.svg",
+};
+
 function TeamSection() {
   const [filter, setFilter] = React.useState("Todas");
   const positions = ["Todas", "Portera", "Defensa", "Centrocampista", "Delantera"];
@@ -90,7 +97,7 @@ function TeamSection() {
           {shown.map((p) => (
             <article className="af-player" key={p.num}>
               <div className="af-player-img-wrap">
-                <image-slot id={p.slot} class="af-player-img" placeholder={"foto: " + p.name}></image-slot>
+                <image-slot id={p.slot} class="af-player-img" src={POS_IMG[p.pos] || ""} placeholder={"foto: " + p.name}></image-slot>
                 <span className="af-player-num">{p.num}</span>
                 {p.captain && <span className="af-player-cap">Capitana</span>}
               </div>

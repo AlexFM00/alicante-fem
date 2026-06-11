@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 300">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.2" y2="1">
+      <stop offset="0%" stop-color="#1763B6"/>
+      <stop offset="100%" stop-color="#0B1F3A"/>
+    </linearGradient>
+    <linearGradient id="jersey" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e8edf8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo -->
+  <rect width="240" height="300" fill="url(#bg)"/>
+  <!-- Sombra suelo -->
+  <ellipse cx="120" cy="294" rx="58" ry="6" fill="rgba(0,0,0,0.3)"/>
+
+  <!-- Guantes portera -->
+  <circle cx="16" cy="130" r="12" fill="#E2674A"/>
+  <circle cx="224" cy="130" r="12" fill="#E2674A"/>
+
+  <!-- Brazos abiertos (portera lista para parar) -->
+  <path d="M88,124 Q52,112 16,130" stroke="#E8C49A" stroke-width="15" stroke-linecap="round" fill="none"/>
+  <path d="M152,124 Q188,112 224,130" stroke="#E8C49A" stroke-width="15" stroke-linecap="round" fill="none"/>
+
+  <!-- Cuerpo jersey -->
+  <path d="M83,118 L157,118 L147,210 L93,210 Z" fill="url(#jersey)"/>
+  <!-- Panel lateral izquierdo azul -->
+  <path d="M83,118 L100,118 L96,210 L93,210 Z" fill="#1763B6" opacity="0.35"/>
+  <!-- Panel lateral derecho azul -->
+  <path d="M157,118 L140,118 L144,210 L147,210 Z" fill="#1763B6" opacity="0.35"/>
+  <!-- Cuello -->
+  <path d="M106,118 Q120,128 134,118" stroke="#1763B6" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Número -->
+  <text x="120" y="183" text-anchor="middle" font-family="'Arial Black',Arial,sans-serif" font-size="40" font-weight="900" fill="#1763B6" opacity="0.45">1</text>
+
+  <!-- Cuello piel -->
+  <rect x="110" y="100" width="20" height="22" rx="6" fill="#E8C49A"/>
+  <!-- Cabeza -->
+  <ellipse cx="120" cy="76" rx="26" ry="28" fill="#E8C49A"/>
+  <!-- Pelo -->
+  <ellipse cx="120" cy="52" rx="27" ry="14" fill="#2C1810"/>
+  <ellipse cx="120" cy="50" rx="20" ry="10" fill="#3D2517"/>
+  <!-- Cola de caballo -->
+  <path d="M143,62 Q160,68 154,86" stroke="#2C1810" stroke-width="9" stroke-linecap="round" fill="none"/>
+
+  <!-- Pantalón corto izquierdo -->
+  <path d="M93,208 L118,208 L114,262 L88,262 Z" fill="#0B1F3A"/>
+  <!-- Pantalón corto derecho -->
+  <path d="M147,208 L122,208 L126,262 L152,262 Z" fill="#0B1F3A"/>
+
+  <!-- Medias izquierda -->
+  <rect x="86" y="260" width="30" height="22" rx="3" fill="white"/>
+  <rect x="86" y="260" width="30" height="7" rx="0" fill="#1763B6"/>
+  <!-- Medias derecha -->
+  <rect x="124" y="260" width="30" height="22" rx="3" fill="white"/>
+  <rect x="124" y="260" width="30" height="7" rx="0" fill="#1763B6"/>
+
+  <!-- Botas izquierda -->
+  <path d="M84,280 Q74,282 72,290 L116,290 L116,280 Z" fill="#0a1830"/>
+  <!-- Botas derecha -->
+  <path d="M156,280 Q166,282 168,290 L124,290 L124,280 Z" fill="#0a1830"/>
+
+  <!-- Texto posición -->
+  <text x="120" y="299" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="rgba(255,255,255,0.38)" letter-spacing="3">PORTERA</text>
+</svg>
