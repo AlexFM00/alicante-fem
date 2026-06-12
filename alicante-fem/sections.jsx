@@ -1,7 +1,7 @@
 // sections.jsx — secciones de la web
 
 /* ---------- HERO ---------- */
-function Hero({ onChat }) {
+function Hero({ onChat, onEnroll }) {
   return (
     <header className="af-hero" id="inicio">
       <image-slot id="hero-bg" class="af-hero-bg" placeholder="foto: panorámica de Alicante / equipo celebrando"></image-slot>
@@ -17,12 +17,125 @@ function Hero({ onChat }) {
         </h1>
         <p className="af-hero-tag">{CLUB.tagline}. Cantera, ciudad y Mediterráneo en cada partido.</p>
         <div className="af-hero-cta">
-          <a href="#equipo" className="af-btn af-btn-primary">Conoce al equipo</a>
+          <button className="af-btn af-btn-primary" onClick={onEnroll}>Entrena con nosotras</button>
           <button className="af-btn af-btn-ghost" onClick={onChat}>Hablar con el club</button>
         </div>
       </div>
       <a href="#ciudad" className="af-hero-scroll" aria-label="Bajar">↓</a>
     </header>
+  );
+}
+
+/* ---------- FORMULARIO INSCRIPCIÓN ---------- */
+const CATEGORIAS = [
+  { value: "Infantil", label: "Infantil (11-12 años)" },
+  { value: "Cadete", label: "Cadete (13-14 años)" },
+  { value: "Juvenil", label: "Juvenil (15-17 años)" },
+  { value: "Senior", label: "Senior (18+ años)" },
+];
+
+function EnrollModal({ open, onClose }) {
+  const EMPTY = { nombre: "", categoria: "", edad: "", email: "", telefono: "", experiencia: "", mensaje: "" };
+  const [form, setForm] = React.useState(EMPTY);
+  const [status, setStatus] = React.useState("idle"); // idle | sending | done | error
+  const [demo, setDemo] = React.useState(false);
+
+  React.useEffect(() => { if (open) { setForm(EMPTY); setStatus("idle"); setDemo(false); } }, [open]);
+
+  if (!open) return null;
+
+  const set = (k, v) => setForm((s) => ({ ...s, [k]: v }));
+
+  const submit = async (e) => {
+    e.preventDefault();
+    setStatus("sending");
+    const res = await sendToN8n("contacto", {
+      tipo: "inscripcion",
+      nombre_jugadora: form.nombre,
+      categoria: form.categoria,
+      edad: form.edad,
+      email_contacto: form.email,
+      telefono: form.telefono,
+      experiencia_previa: form.experiencia,
+      mensaje: form.mensaje,
+    });
+    setDemo(res.demo);
+    setStatus(res.ok ? "done" : "error");
+  };
+
+  return (
+    <div className="af-modal-overlay" onClick={onClose}>
+      <div className="af-modal af-enroll-modal" onClick={(e) => e.stopPropagation()}>
+        {status === "done" ? (
+          <div className="af-enroll-ok">
+            <div className="af-enroll-ok-icon">⚽</div>
+            <h3>¡Solicitud enviada!</h3>
+            <p>{demo ? "Modo demo — en producción el club recibirá tu solicitud y os contactaremos en 48h." : "Hemos recibido tu solicitud. Os contactaremos en menos de 48h. ¡Aupa Alicante Fem! 💙"}</p>
+            <button className="af-btn af-btn-primary" onClick={onClose}>Cerrar</button>
+          </div>
+        ) : (
+          <>
+            <div className="af-modal-head">
+              <div>
+                <div className="af-eyebrow">Únete al club</div>
+                <h3>Entrena con nosotras</h3>
+              </div>
+              <button className="af-icon-btn" onClick={onClose} aria-label="Cerrar">✕</button>
+            </div>
+            <p className="af-modal-sub">Rellena el formulario y el club se pondrá en contacto contigo en menos de 48 horas. Las pruebas son gratuitas y sin compromiso.</p>
+            <form className="af-enroll-form" onSubmit={submit}>
+              <label className="af-field">
+                <span className="af-field-label">Nombre de la jugadora *</span>
+                <input className="af-input" required placeholder="Nombre y apellidos" value={form.nombre} onChange={(e) => set("nombre", e.target.value)} />
+              </label>
+              <div className="af-field-row">
+                <label className="af-field">
+                  <span className="af-field-label">Categoría *</span>
+                  <select className="af-input" required value={form.categoria} onChange={(e) => set("categoria", e.target.value)}>
+                    <option value="">Selecciona...</option>
+                    {CATEGORIAS.map((c) => <option key={c.value} value={c.value}>{c.label}</option>)}
+                  </select>
+                </label>
+                <label className="af-field">
+                  <span className="af-field-label">Edad *</span>
+                  <input className="af-input" required type="number" min="8" max="40" placeholder="Años" value={form.edad} onChange={(e) => set("edad", e.target.value)} />
+                </label>
+              </div>
+              <div className="af-field-row">
+                <label className="af-field">
+                  <span className="af-field-label">Email de contacto *</span>
+                  <input className="af-input" required type="email" placeholder="Email del padre/madre" value={form.email} onChange={(e) => set("email", e.target.value)} />
+                </label>
+                <label className="af-field">
+                  <span className="af-field-label">Teléfono</span>
+                  <input className="af-input" type="tel" placeholder="6XX XXX XXX" value={form.telefono} onChange={(e) => set("telefono", e.target.value)} />
+                </label>
+              </div>
+              <label className="af-field">
+                <span className="af-field-label">Experiencia previa en fútbol</span>
+                <select className="af-input" value={form.experiencia} onChange={(e) => set("experiencia", e.target.value)}>
+                  <option value="">Sin experiencia / primera vez</option>
+                  <option value="1-2 años">1-2 años en club o escuela</option>
+                  <option value="3-5 años">3-5 años federada</option>
+                  <option value="+5 años">Más de 5 años federada</option>
+                </select>
+              </label>
+              <label className="af-field">
+                <span className="af-field-label">¿Algo más que quieras contarnos?</span>
+                <textarea className="af-input af-textarea" rows={3} placeholder="Horarios preferidos, dudas, situación especial..." value={form.mensaje} onChange={(e) => set("mensaje", e.target.value)} />
+              </label>
+              {status === "error" && <p className="af-enroll-error">Error al enviar. Inténtalo de nuevo o escríbenos a hola@alicantefem.com</p>}
+              <div className="af-modal-foot">
+                <button type="button" className="af-btn af-btn-ghost" onClick={onClose}>Cancelar</button>
+                <button type="submit" className="af-btn af-btn-primary" disabled={status === "sending"}>
+                  {status === "sending" ? "Enviando..." : "Enviar solicitud"}
+                </button>
+              </div>
+            </form>
+          </>
+        )}
+      </div>
+    </div>
   );
 }
 

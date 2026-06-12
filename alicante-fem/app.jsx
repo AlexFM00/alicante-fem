@@ -109,6 +109,7 @@ function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
   const [chatOpen, setChatOpen] = React.useState(false);
+  const [enrollOpen, setEnrollOpen] = React.useState(false);
 
   React.useEffect(() => {
     document.documentElement.style.setProperty("--accent", t.accent);
@@ -123,7 +124,8 @@ function App() {
   return (
     <div className="af-app">
       <Nav onSettings={() => setSettingsOpen(true)} />
-      <Hero onChat={() => setChatOpen(true)} />
+      <Hero onChat={() => setChatOpen(true)} onEnroll={() => setEnrollOpen(true)} />
+      <EnrollModal open={enrollOpen} onClose={() => setEnrollOpen(false)} />
 
       {cityFirst ? [City, Team] : [Team, City]}
       <LeagueSection />
